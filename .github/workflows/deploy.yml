@@ -38,7 +38,7 @@ jobs:
         run: |
           rm -rf node_modules # Elimina node_modules en caso de que haya problemas con dependencias previas
           rm package-lock.json # Elimina package-lock.json en caso de que esté corrupto
-          npm ci  # o pnpm install / yarn install
+          npm install  # Usar npm install para generar un nuevo package-lock.json si no existe
       - name: Build with VitePress
         run: npm run docs:build  # o pnpm docs:build / yarn docs:build
       - name: Upload artifact
