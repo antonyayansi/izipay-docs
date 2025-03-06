@@ -44,7 +44,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: docs/.vitepress/dist  # Directorio donde VitePress coloca la construcción final
+          path: .vitepress/dist  # Directorio donde VitePress coloca la construcción final
 
   # Deployment job
   deploy:
