@@ -12,7 +12,7 @@ hero:
       link: /docs/install
     - theme: alt
       text: Ejemplos
-      link: /api-examples
+      link: /examples/react
 
 features:
   - title: Integración Rápida
