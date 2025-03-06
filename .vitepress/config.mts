@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "@dankira | Izipay",
+  title: "Izipay Form",
   description: "💳 Integración de Izipay en su proyecto, con configuración mínima y proxy integrado.",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
@@ -33,8 +33,17 @@ export default defineConfig({
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' },
-      { icon: 'twitter', link: 'https://twitter.com/vite_js'}
-    ]
-  }
+      { icon: 'npm', link: 'https://www.npmjs.com/package/@dankira/izipay' },
+      { icon: 'github', link: 'https://github.com/antonyayansi/izipay' },
+      { icon: 'x', link: 'https://x.com/_dankira_'}
+    ],
+
+    footer: {
+      message: '© 2025 Todos los derechos reservados.',
+      copyright: 'Hecho con ❤️ por <a target="_blank" href="https://x.com/_dankira_">@dankira</a>'
+    },
+  },
+  head: [
+    ['link', { rel: 'icon', href: 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦄</text></svg>' }]
+  ]
 })
