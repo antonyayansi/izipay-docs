@@ -3,22 +3,15 @@
 name: Dankira Izipay Docs
 
 on:
-  # Runs on pushes targeting the `main` branch. Change this to `master` if you're
-  # using the `master` branch as the default branch.
   push:
-    branches: [main]
+    branches: [main]  # Cambiar a la rama que uses para el despliegue
+  workflow_dispatch:  # Permite ejecutar manualmente el flujo desde la pestaña Actions
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: pages
   cancel-in-progress: false
@@ -31,26 +24,27 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Not needed if lastUpdated is not enabled
-      # - uses: pnpm/action-setup@v3 # Uncomment this block if you're using pnpm
+          fetch-depth: 0 # No necesario si no usas `lastUpdated` en VitePress
+      # - uses: pnpm/action-setup@v3 # Descomenta esto si usas pnpm
       #   with:
-      #     version: 9 # Not needed if you've set "packageManager" in package.json
-      # - uses: oven-sh/setup-bun@v1 # Uncomment this if you're using Bun
+      #     version: 9 # No necesario si has configurado "packageManager" en package.json
+      # - uses: oven-sh/setup-bun@v1 # Descomenta esto si usas Bun
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm # or pnpm / yarn
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
+          cache: npm  # o pnpm / yarn, dependiendo del gestor que uses
       - name: Install dependencies
-        run: npm ci # or pnpm install / yarn install / bun install
+        run: |
+          rm -rf node_modules # Elimina node_modules en caso de que haya problemas con dependencias previas
+          rm package-lock.json # Elimina package-lock.json en caso de que esté corrupto
+          npm ci  # o pnpm install / yarn install
       - name: Build with VitePress
-        run: npm run docs:build # or pnpm docs:build / yarn docs:build / bun run docs:build
+        run: npm run docs:build  # o pnpm docs:build / yarn docs:build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: docs/.vitepress/dist
+          path: docs/.vitepress/dist  # Directorio donde VitePress coloca la construcción final
 
   # Deployment job
   deploy:
